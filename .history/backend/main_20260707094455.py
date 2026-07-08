@@ -1,8 +1,6 @@
-import os
 import joblib
 import numpy as np
 import pandas as pd
-from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -20,43 +18,30 @@ app.add_middleware(
 # ============================================================
 # Load all model artifacts on startup
 # ============================================================
-# Use Path(__file__).parent so it works no matter where
-# uvicorn is launched from (local dev, Render, etc.)
-ARTIFACTS_DIR = Path(__file__).parent / "model_artifacts"
+print("Loading model artifacts...")
 
-print(f"Loading model artifacts from: {ARTIFACTS_DIR}")
-print(f"Directory exists: {ARTIFACTS_DIR.exists()}")
-if ARTIFACTS_DIR.exists():
-    print(f"Files: {list(ARTIFACTS_DIR.iterdir())}")
-
-def load_artifact(filename: str):
-    """Load a single artifact from the model_artifacts directory."""
-    path = ARTIFACTS_DIR / filename
-    if not path.exists():
-        raise FileNotFoundError(
-            f"Model artifact not found: {path}\n"
-            f"Make sure you have run 'python train.py' and committed "
-            f"the model_artifacts/ folder to Git."
-        )
-    with open(path, "rb") as f:
-        return joblib.load(f)
-
-model_rf = load_artifact("model_rf.pkl")
-model_xgb = load_artifact("model_xgb.pkl")
-model_lr = load_artifact("model_lr.pkl")
-model_mlp = load_artifact("model_mlp.pkl")
-scaler = load_artifact("scaler.pkl")
-label_encoders = load_artifact("label_encoders.pkl")
-feature_names = load_artifact("feature_names.pkl")
+with open("model_artifacts/model_rf.pkl", "rb") as f:
+    model_rf = joblib.load(f)
+with open("model_artifacts/model_xgb.pkl", "rb") as f:
+    model_xgb = joblib.load(f)
+with open("model_artifacts/model_lr.pkl", "rb") as f:
+    model_lr = joblib.load(f)
+with open("model_artifacts/model_mlp.pkl", "rb") as f:
+    model_mlp = joblib.load(f)
+with open("model_artifacts/scaler.pkl", "rb") as f:
+    scaler = joblib.load(f)
+with open("model_artifacts/label_encoders.pkl", "rb") as f:
+    label_encoders = joblib.load(f)
+with open("model_artifacts/feature_names.pkl", "rb") as f:
+    feature_names = joblib.load(f)
 
 # SHAP explainer (optional)
 HAS_SHAP = False
 try:
-    shap_explainer = load_artifact("shap_explainer.pkl")
+    with open("model_artifacts/shap_explainer.pkl", "rb") as f:
+        shap_explainer = joblib.load(f)
     HAS_SHAP = True
     print("SHAP explainer loaded successfully.")
-except FileNotFoundError:
-    print("SHAP explainer not found — will use XGBoost feature importance as fallback.")
 except Exception as e:
     print(f"SHAP explainer could not be loaded: {e}")
     print("SHAP values will use XGBoost feature importance as fallback.")
