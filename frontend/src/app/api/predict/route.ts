@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { PatientInput } from "@/lib/stroke-prediction";
 
-const BACKEND_URL = "http://localhost:8000";
+//const BACKEND_URL = "http://localhost:8000";
+const BACKEND_URL = process.env.BACKEND_URL || "";
 
 export async function POST(request: NextRequest) {
   try {
