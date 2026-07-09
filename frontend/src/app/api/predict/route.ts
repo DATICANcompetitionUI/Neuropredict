@@ -71,13 +71,28 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: true, data: result, source: "real_model" });
       } else {
         return NextResponse.json(
-          { success: false, error: `Backend returned status ${res.status}. Is the Python server running?` },
+          {
+            success: false,
+            error: `Backend returned status ${res.status}. The server may be restarting or waking up from sleep. Please wait about 30 seconds and retry.`,
+            how_to_fix: [
+              "Wait about 30 seconds and click Retry Analysis",
+              "The free-tier server pauses when idle and needs time to restart"
+            ]
+          },
           { status: 502 }
         );
       }
     } catch (err) {
       return NextResponse.json(
-        { success: false, error: `Cannot connect to ML backend at ${BACKEND_URL}. Make sure the FastAPI server is running with: uvicorn main:app --port 8000` },
+        {
+          success: false,
+          error: `Cannot connect to ML backend at ${BACKEND_URL}. This server runs on a free-tier cloud service that automatically pauses when not in use. It typically takes about 30 seconds to wake up. Please wait a moment and try again.`,
+          how_to_fix: [
+            "Wait about 30 seconds and click Retry Analysis",
+            "The server pauses after ~15 minutes of inactivity",
+            "Once awake, subsequent requests will be instant"
+          ]
+        },
         { status: 503 }
       );
     }
