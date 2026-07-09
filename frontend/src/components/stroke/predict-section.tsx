@@ -454,13 +454,13 @@ export function PredictSection() {
                       </p>
                       <div className="mt-4 p-3 rounded-lg bg-muted/50 border">
                         <p className="text-xs font-medium text-muted-foreground mb-1">
-                          How to fix:
+                          What's happening:
                         </p>
                         <ol className="text-xs text-muted-foreground list-decimal list-inside space-y-1">
-                          <li>Make sure the Python backend is running: <code className="bg-muted px-1.5 py-0.5 rounded text-xs">uvicorn main:app --port 8000</code></li>
-                          <li>Check that port 8000 is not in use by another application</li>
-                          <li>Verify the <code className="bg-muted px-1.5 py-0.5 rounded text-xs">BACKEND_URL</code> in your API route matches the backend address</li>
-                          <li>Try again after confirming the backend is running</li>
+                          <li>The ML backend runs on a free-tier cloud service (Render)</li>
+                          <li>It automatically pauses after ~15 minutes of inactivity to save resources</li>
+                          <li>Waking up takes about 30 seconds — please wait and retry</li>
+                          <li>Once awake, all subsequent predictions will be instant</li>
                         </ol>
                       </div>
                       <Button
