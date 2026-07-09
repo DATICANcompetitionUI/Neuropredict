@@ -2,6 +2,15 @@
 # NeuroPredict AI
 
 **Intelligent Stroke Risk Assessment Using Explainable Machine Learning**
+<img width="1613" height="863" alt="Screenshot 2026-07-08 182750" src="https://github.com/user-attachments/assets/08dfe03d-0779-4b35-85f8-f884d5901de9" />
+<img width="1602" height="862" alt="Screenshot 2026-07-08 182924" src="https://github.com/user-attachments/assets/952522cf-7efe-4684-96f5-7836fc8d1a92" />
+<img width="1620" height="860" alt="Screenshot 2026-07-08 183017" src="https://github.com/user-attachments/assets/e4dba84e-ba1d-45d8-9c47-9431407e023d" />
+<img width="1603" height="852" alt="Screenshot 2026-07-08 183133" src="https://github.com/user-attachments/assets/236e03f0-8015-46bb-b064-cd83c513239c" />
+<img width="1617" height="860" alt="Screenshot 2026-07-08 183220" src="https://github.com/user-attachments/assets/103f88d7-c222-45a4-9b00-a8b5e878d398" />
+
+
+
+
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
